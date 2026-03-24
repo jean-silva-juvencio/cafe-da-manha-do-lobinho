@@ -24,7 +24,6 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
         
-        /* ANIMAÇÕES */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -47,7 +46,6 @@
             100% { transform: scale(1); box-shadow: 0 5px 20px rgba(212,175,55,0.2); }
         }
         
-        /* BARRA DE NAVEGAÇÃO SUPERIOR */
         .top-bar {
             position: fixed;
             top: 0;
@@ -85,7 +83,6 @@
             transform: translateY(-2px);
         }
         
-        /* BOTÃO TEMA */
         .theme-toggle {
             background: rgba(212,175,55,0.15);
             border: 2px solid rgba(212,175,55,0.5);
@@ -107,7 +104,6 @@
             border-color: #d4af37;
         }
         
-        /* HEADER COM BANNER */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -248,7 +244,6 @@
             transform: translateY(-3px);
         }
         
-        /* TEMA CLARO */
         body.tema-claro {
             background: #fef9e8;
             color: #1a1a1a;
@@ -330,7 +325,6 @@
             border-top-color: rgba(212,175,55,0.2);
         }
         
-        /* SEÇÕES */
         .section {
             padding: 60px 20px;
             max-width: 1200px;
@@ -354,7 +348,6 @@
             font-size: 1rem;
         }
         
-        /* CARDÁPIO */
         .categoria-titulo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -417,16 +410,6 @@
             margin-bottom: 10px;
         }
         
-        .menu-item-tag {
-            display: inline-block;
-            background: rgba(212,175,55,0.15);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            color: #d4af37;
-        }
-        
-        /* QR CODE */
         .qrcode-section {
             text-align: center;
             margin: 40px 0;
@@ -466,7 +449,6 @@
             font-size: 0.9rem;
         }
         
-        /* GALERIA - RESPONSIVA */
         .gallery-section {
             margin: 40px 0;
         }
@@ -505,7 +487,6 @@
             transform: scale(1.05);
         }
         
-        /* VÍDEO GRANDE - OCUPA 2 COLUNAS */
         .gallery-video-large {
             grid-column: span 2;
             aspect-ratio: 16 / 9;
@@ -518,19 +499,16 @@
             border: none;
         }
         
-        /* Responsividade para tablet */
         @media (max-width: 1024px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
-            
             .gallery-video-large {
                 grid-column: span 2;
             }
         }
         
-        /* Responsividade para celular */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -568,7 +546,6 @@
             }
         }
         
-        /* INFORMAÇÕES */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -606,7 +583,6 @@
             font-size: 0.85rem;
         }
         
-        /* MAPA */
         .map-container {
             border-radius: 20px;
             overflow: hidden;
@@ -637,7 +613,6 @@
             opacity: 0.7;
         }
         
-        /* WHATSAPP FLUTUANTE */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -664,7 +639,6 @@
 </head>
 <body>
 
-<!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
 <div class="top-bar">
     <div class="social-links">
         <a href="https://www.instagram.com/cafedolobinho/" target="_blank">
@@ -676,7 +650,6 @@
     </div>
 </div>
 
-<!-- HERO SECTION -->
 <div class="hero">
     <div class="hero-banner"></div>
     <div class="hero-content">
@@ -695,7 +668,6 @@
     </div>
 </div>
 
-<!-- CARDÁPIO -->
 <div id="cardapio" class="section">
     <h2 class="section-title">Nosso Cardápio</h2>
     <p class="section-subtitle">Delícias preparadas com amor e ingredientes frescos</p>
@@ -716,7 +688,6 @@
     <div class="menu-grid" id="especiaisGrid"></div>
 </div>
 
-<!-- QR CODE E PIX -->
 <div class="section">
     <div class="qrcode-section">
         <h3><i class="fas fa-qrcode"></i> QR CODE</h3>
@@ -730,50 +701,35 @@
     </div>
 </div>
 
-<!-- GALERIA: 6 IMAGENS + VÍDEO GRANDE NO FINAL (SEM AUTOPLAY) -->
 <div class="section gallery-section">
     <h2 class="section-title">Momentos Registrados</h2>
     <p class="section-subtitle">Venha fazer parte dessa história</p>
     
     <div class="gallery-grid">
-        <!-- IMAGEM 1 -->
         <div class="gallery-item">
             <img src="./imagem/Captura de tela de 2026-03-23 13-23-12.png" alt="Café especial do Lobinho">
         </div>
-        
-        <!-- IMAGEM 2 -->
         <div class="gallery-item">
             <img src="./imagem/lobinho4.jpg" alt="Tapioca caseira">
         </div>
-        
-        <!-- IMAGEM 3 -->
         <div class="gallery-item">
             <img src="./imagem/lobinho5.jpg" alt="Espaço aconchegante">
         </div>
-        
-        <!-- IMAGEM 4 -->
         <div class="gallery-item">
             <img src="./imagem/lobinho6.jpg" alt="Equipe Lobinho">
         </div>
-        
-        <!-- IMAGEM 5 -->
         <div class="gallery-item">
             <img src="./imagem/lobinho7.jpg" alt="Sabor amazônico">
         </div>
-        
-        <!-- IMAGEM 6 (NOVA FOTO) -->
         <div class="gallery-item">
             <img src="./imagem/lobinho10.jpeg" alt="Café da manhã especial">
         </div>
-        
-        <!-- VÍDEO GRANDE - OCUPA ESPAÇO DE 2 IMAGENS (SEM AUTOPLAY) -->
         <div class="gallery-item gallery-video-large">
             <iframe src="./imagem/videolobinho.mp4" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </div>
 
-<!-- INFORMAÇÕES -->
 <div class="section">
     <h2 class="section-title">Informações</h2>
     <div class="info-grid">
@@ -795,7 +751,6 @@
     </div>
 </div>
 
-<!-- LOCALIZAÇÃO -->
 <div class="section">
     <h2 class="section-title">Onde Estamos</h2>
     <p class="section-subtitle">Venha nos visitar e experimentar nossas delícias</p>
@@ -826,21 +781,22 @@
 </a>
 
 <script>
-    // CARDÁPIO COMPLETO
+    // CARDÁPIO COMPLETO COM OS PREÇOS CORRETOS
     const cardapio = {
         sanduiches: [
-            { nome: "Pão c/ Queijo Prato / Presunto / Ovo + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Ovo + Queijo", preco: "" },
-            { nome: "Pão c/ Tucumã + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Tucumã / Queijo + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Carne + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Carne e Queijo + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Queijo / Presunto / Ovo / Carne + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Queijo / Presunto / Ovo e Bacon + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Salsicha / Queijo / Ovo / Presunto + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Banana e Queijo + Café ou Suco", preco: "" },
-            { nome: "Misto com Presunto de Peru + Café ou Suco", preco: "" },
-            { nome: "Pão c/ Queijo Coalho + Ovo + Café ou Suco", preco: "" }
+            { nome: "Pão c/ Queijo Prato / Presunto / Ovo + Café ou Suco", preco: "10,00" },
+            { nome: "Pão c/ Ovo + Queijo", preco: "10,00" },
+            { nome: "Pão c/ Tucumã + Café ou Suco", preco: "12,00" },
+            { nome: "Pão c/ Tucumã + Queijo + Café ou Suco", preco: "13,00" },
+            { nome: "Pão c/ Tucumã / Queijo / Banana + Café ou Suco", preco: "15,00" },
+            { nome: "Pão c/ Carne + Café ou Suco", preco: "10,00" },
+            { nome: "Pão c/ Carne e Queijo + Café ou Suco", preco: "12,00" },
+            { nome: "Pão c/ Queijo / Presunto / Ovo / Carne + Café ou Suco", preco: "14,00" },
+            { nome: "Pão c/ Queijo / Presunto / Ovo e Bacon + Café ou Suco", preco: "12,00" },
+            { nome: "Pão c/ Salsicha / Queijo / Ovo / Presunto + Café ou Suco", preco: "12,00" },
+            { nome: "Pão c/ Banana e Queijo + Café ou Suco", preco: "12,00" },
+            { nome: "Misto com Presunto de Peru + Café ou Suco", preco: "8,00" },
+            { nome: "Pão c/ Queijo Coalho + Ovo + Café ou Suco", preco: "10,00" }
         ],
         tapiocas: [
             { nome: "Tapioca c/ Manteiga + Café ou Suco", preco: "6,00" },
@@ -867,9 +823,8 @@
             <div class="menu-item">
                 <div class="menu-item-header">
                     <span class="menu-item-name">${String(index + 1).padStart(2, '0')} - ${item.nome}</span>
-                    <span class="menu-item-price">${item.preco ? `R$ ${item.preco}` : ''}</span>
+                    <span class="menu-item-price">R$ ${item.preco}</span>
                 </div>
-                ${!item.preco ? '<span class="menu-item-tag">Acompanha Café ou Suco</span>' : ''}
             </div>
         `).join('');
         
@@ -895,7 +850,6 @@
         `).join('');
     }
     
-    // TEMA CLARO/ESCURO
     function alternarTema() {
         document.body.classList.toggle('tema-claro');
         const tema = document.body.classList.contains('tema-claro') ? 'claro' : 'escuro';
@@ -912,7 +866,6 @@
     renderizarCardapio();
     carregarTema();
     
-    // SCROLL SUAVE
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -923,7 +876,6 @@
         });
     });
     
-    // ANIMAÇÃO AO SCROLL
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'

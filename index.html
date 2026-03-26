@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Café da Manhã do Lobinho | Café regional mais perto de você </title>
+    <title>Café da Manhã do Lobinho | Café regional mais perto de você</title>
     <meta name="description" content="O melhor café da manhã de Manaus. Sanduíches, tapiocas e delícias amazônicas com ingredientes frescos.">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -46,7 +46,6 @@
             100% { transform: scale(1); box-shadow: 0 5px 20px rgba(212,175,55,0.2); }
         }
         
-        /* Animação do botão Rádio */
         @keyframes radioPulse {
             0%, 100% {
                 transform: scale(1);
@@ -95,7 +94,6 @@
             transform: translateY(-2px);
         }
         
-        /* Botão Rádio Lobinho */
         .radio-trigger {
             background: linear-gradient(135deg, #d4af37, #f5e56b);
             border: none;
@@ -484,7 +482,6 @@
             font-size: 0.9rem;
         }
         
-        /* Seção do Player Rádio */
         .radio-player-section {
             margin: 40px 0;
             padding: 25px;
@@ -532,7 +529,6 @@
             transform: scale(1.1);
         }
         
-        /* Barra de Progresso */
         .progress-container {
             margin: 20px auto;
             max-width: 400px;
@@ -923,7 +919,6 @@
         </button>
     </div>
     
-    <!-- Barra de Progresso -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar" onclick="buscarMusica(event)">
             <div class="progress-fill" id="progressFill"></div>
@@ -953,7 +948,6 @@
 </a>
 
 <script>
-    // CARDÁPIO COMPLETO COM OS PREÇOS CORRETOS
     const cardapio = {
         sanduiches: [
             { nome: "Pão c/ Queijo Prato / Presunto / Ovo + Café ou Suco", preco: "10,00" },
@@ -1035,24 +1029,15 @@
         }
     }
     
-    // ========== RÁDIO DO LOBINHO COM PLAYLIST E BARRA DE PROGRESSO ==========
     let audio = null;
     let musicaAtual = 0;
     
-    // PLAYLIST COM SUAS MÚSICAS
+    // PLAYLIST COM SUAS MÚSICAS - CORRIGIDA
     let playlist = [
-        '.ABBA-Dancing Queen.mp3',
-        '/berlim.mp3',
+        './berlim.mp3',
+        './ABBA-Dancing Queen.mp3',
         './irene.mp3',
-        './tina.mp3',
-    ];
-    
-    // NOMES BONITOS PARA MOSTRAR NO PLAYER
-    let nomesBonitos = [
-        'ABBA',
-        'berlim',
-        'irene ',
-        'Tina Charles - I Love To Love'
+        './tina.mp3'
     ];
     
     function irParaRadio() {
@@ -1090,7 +1075,8 @@
     }
     
     function atualizarNomeMusica() {
-        document.getElementById('musicaAtual').innerHTML = nomesBonitos[musicaAtual];
+        let nome = playlist[musicaAtual].replace('./', '').replace('.mp3', '');
+        document.getElementById('musicaAtual').innerHTML = nome;
     }
     
     function tocarMusica() {

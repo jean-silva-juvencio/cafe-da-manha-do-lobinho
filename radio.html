@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Rádio do Lobinho | Café do Lobinho</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        @keyframes girar {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes brilho {
+            0% { text-shadow: 0 0 0px #d4af37; }
+            50% { text-shadow: 0 0 10px #d4af37, 0 0 20px rgba(212,175,55,0.5); }
+            100% { text-shadow: 0 0 0px #d4af37; }
+        }
+        
+        /* ========== BARRA SUPERIOR (MENU) ========== */
+        .barra-superior {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(18,18,18,0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+        
+        .logo-radio {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-radio i {
+            font-size: 1.6rem;
+            color: #d4af37;
+        }
+        
+        .logo-radio span {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .area-direita {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .btn-tema {
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.5);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-tema:hover {
+            background: rgba(212,175,55,0.3);
+            transform: scale(1.02);
+        }
+        
+        .btn-tema.animar {
+            animation: girar 0.5s ease;
+        }
+        
+        .hamburger {
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span {
+            width: 20px;
+            height: 2px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        /* Menu Lateral */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1a1a1a;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            z-index: 1100;
+            transition: left 0.3s ease;
+            padding: 90px 20px 20px;
+        }
+        
+        body.tema-claro .sidebar {
+            background: #ffffff;
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        
+        body.tema-claro .sidebar a {
+            color: #1a1a1a;
+        }
+        
+        .sidebar a:hover {
+            background: rgba(212,175,55,0.2);
+        }
+        
+        .sidebar .divider {
+            height: 1px;
+            background: rgba(212,175,55,0.2);
+            margin: 15px 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* ========== CONTEÚDO PRINCIPAL ========== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .embreve-card {
+            text-align: center;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .embreve-icon {
+            font-size: 5rem;
+            color: #d4af37;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .embreve-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            animation: brilho 2s ease-in-out infinite;
+        }
+        
+        .embreve-subtitle {
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        
+        .embreve-text {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .embreve-text i {
+            color: #d4af37;
+            margin-right: 5px;
+        }
+        
+        .embreve-badge {
+            display: inline-block;
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-top: 30px;
+            color: #d4af37;
+        }
+        
+        /* TEMA CLARO */
+        body.tema-claro {
+            background: #fef9e8;
+            color: #1a1a1a;
+        }
+        
+        body.tema-claro .barra-superior {
+            background: rgba(255,255,245,0.95);
+        }
+        
+        body.tema-claro .embreve-text {
+            color: #4a4a4a;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .barra-superior {
+                padding: 10px 16px;
+            }
+            
+            .logo-radio span {
+                font-size: 0.9rem;
+            }
+            
+            .btn-tema {
+                padding: 6px 12px;
+                font-size: 0.7rem;
+            }
+            
+            .hamburger {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .embreve-title {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+            
+            .embreve-icon {
+                font-size: 4rem;
+            }
+            
+            .embreve-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .embreve-title {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<div class="barra-superior">
+    <div class="logo-radio">
+        <i class="fas fa-headphones"></i>
+        <span>RÁDIO DO LOBINHO</span>
+    </div>
+    <div class="area-direita">
+        <div class="btn-tema" onclick="alternarTema()">
+            <i class="fas fa-sun"></i> <i class="fas fa-moon"></i> TEMA
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="fecharMenu()"></div>
+
+<!-- Menu Lateral -->
+<div id="sidebar" class="sidebar">
+    <a href="index.html" onclick="fecharMenu()"><i class="fas fa-home"></i> INÍCIO</a>
+    <a href="index.html#cardapio" onclick="fecharMenu()"><i class="fas fa-utensils"></i> CARDÁPIO</a>
+    <a href="galeria.html" onclick="fecharMenu()"><i class="fas fa-images"></i> GALERIA</a>
+    <a href="radio.html" onclick="fecharMenu()"><i class="fas fa-headphones"></i> RÁDIO DO LOBINHO</a>
+    <a href="index.html#localizacao" onclick="fecharMenu()"><i class="fas fa-map-marker-alt"></i> LOCALIZAÇÃO</a>
+    <div class="divider"></div>
+    <a href="https://www.instagram.com/cafedolobinho/" target="_blank"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+    <a href="https://wa.me/5592992674472" target="_blank"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="container">
+    <div class="embreve-card">
+        <div class="embreve-icon">
+            <i class="fas fa-headphones"></i>
+        </div>
+        <h1 class="embreve-title">EM BREVE</h1>
+        <div class="embreve-subtitle">
+            <i class="fas fa-microphone-alt"></i> Rádio do Lobinho
+        </div>
+        <div class="embreve-text">
+            <p>Estamos preparando uma programação especial para você!</p>
+            <p style="margin-top: 10px;">Em breve você poderá ouvir as melhores músicas<br>enquanto saboreia nosso delicioso café da manhã.</p>
+            <p style="margin-top: 15px;"><i class="fas fa-music"></i> Aguarde, a rádio vai tocar em breve!</p>
+        </div>
+        <div class="embreve-badge">
+            <i class="fas fa-clock"></i> Em desenvolvimento
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== TEMA ==========
+    function alternarTema() {
+        document.body.classList.toggle('tema-claro');
+        const tema = document.body.classList.contains('tema-claro') ? 'claro' : 'escuro';
+        localStorage.setItem('tema_radio', tema);
+        
+        const btn = document.querySelector('.btn-tema');
+        btn.classList.add('animar');
+        setTimeout(() => btn.classList.remove('animar'), 500);
+    }
+    
+    function carregarTema() {
+        const temaSalvo = localStorage.getItem('tema_radio');
+        if (temaSalvo === 'claro') {
+            document.body.classList.add('tema-claro');
+        }
+    }
+    
+    // ========== MENU HAMBURGUER ==========
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
+        
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+    
+    function fecharMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
+        
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+    
+    // ========== INICIALIZAÇÃO ==========
+    carregarTema();
+    
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', fecharMenu);
+    });
+    
+    window.alternarTema = alternarTema;
+    window.toggleMenu = toggleMenu;
+    window.fecharMenu = fecharMenu;
+</script>
+
+</body>
+</html>

@@ -439,14 +439,14 @@
     
     <!-- GALERIA DE IMAGENS -->
     <div class="galeria-grid" id="galeriaGrid">
-        <!-- As 10 imagens serão carregadas via JavaScript -->
+        <!-- As imagens serão carregadas via JavaScript -->
         <div style="text-align: center; grid-column: 1/-1; padding: 50px;">Carregando galeria...</div>
     </div>
     
     <!-- VÍDEO EM DESTAQUE -->
     <div class="video-destaque">
         <video id="videoLobinho" controls>
-            <source src="imagem/video1.mp4" type="video/mp4">
+            <source src="video1.mp4" type="video/mp4">
             Seu navegador não suporta vídeo.
         </video>
         <div class="video-label">
@@ -464,19 +464,20 @@
 </div>
 
 <script>
-    // ========== LISTA DAS 10 IMAGENS ==========
-    // As imagens estão na pasta "imagem/" com os nomes lobinho1.jpeg até lobinho10.jpeg
+    // ========== LISTA DAS IMAGENS ==========
+    // ALTERE OS NOMES DOS ARQUIVOS AQUI CONFORME SUAS IMAGENS
+    // As imagens devem estar na MESMA PASTA que o arquivo galeria.html
     const imagens = [
-        { arquivo: "imagem/lobinho1.jpeg" },
-        { arquivo: "imagem/lobinho2.jpeg" },
-        { arquivo: "imagem/lobinho3.jpeg" },
-        { arquivo: "imagem/lobinho4.jpeg" },
-        { arquivo: "imagem/lobinho5.jpeg" },
-        { arquivo: "imagem/lobinho6.jpeg" },
-        { arquivo: "imagem/lobinho7.jpeg" },
-        { arquivo: "imagem/lobinho8.jpeg" },
-        { arquivo: "imagem/lobinho9.jpeg" },
-        { arquivo: "imagem/lobinho10.jpeg" }
+        { arquivo: "lobinho1.jpeg" },
+        { arquivo: "lobinho2.jpeg" },
+        { arquivo: "lobinho3.jpeg" },
+        { arquivo: "lobinho4.jpeg" },
+        { arquivo: "lobinho5.jpeg" },
+        { arquivo: "lobinho6.jpeg" },
+        { arquivo: "lobinho7.jpeg" },
+        { arquivo: "lobinho8.jpeg" },
+        { arquivo: "lobinho9.jpeg" },
+        { arquivo: "lobinho10.jpeg" }
     ];
     
     // Renderizar galeria

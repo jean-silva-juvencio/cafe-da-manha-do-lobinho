@@ -22,8 +22,10 @@
             color: #e0e0e0;
             overflow-x: hidden;
             transition: background 0.3s ease, color 0.3s ease;
+            padding-top: 100px;
         }
         
+        /* ANIMAÇÕES */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -46,97 +48,308 @@
             100% { transform: scale(1); box-shadow: 0 5px 20px rgba(212,175,55,0.2); }
         }
         
-        @keyframes radioPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(212,175,55,0.7);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 8px rgba(212,175,55,0);
-            }
+        @keyframes piscar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
         
-        .top-bar {
+        @keyframes pulseSelo {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+            50% { box-shadow: 0 0 0 3px rgba(220,38,38,0); }
+        }
+        
+        @keyframes tickerScroll {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+        
+        @keyframes tickerScrollLento {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* ========== BARRA DE NOTÍCIAS (TICKER) ========== */
+        .barra-noticias {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            padding: 8px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .container-noticias {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .selo-ao-vivo {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #dc2626;
+            color: white;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            animation: pulseSelo 1.5s ease-in-out infinite;
+        }
+        
+        .ponto-vivo {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: piscar 1s step-end infinite;
+        }
+        
+        .ticker-wrapper {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: tickerScroll 250s linear infinite;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        
+        .ticker-content span {
+            display: inline-block;
+            margin-right: 50px;
+            background: rgba(0,0,0,0.1);
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+        
+        .ticker-wrapper:hover .ticker-content {
+            animation-play-state: paused;
+        }
+        
+        /* ========== BARRA PRINCIPAL (CAFÉ + CLIMA + TEMA + MENU) ========== */
+        .barra-principal {
+            position: fixed;
+            top: 52px;
+            left: 0;
+            right: 0;
+            z-index: 999;
             background: rgba(18,18,18,0.95);
             backdrop-filter: blur(10px);
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212,175,55,0.2);
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
         }
         
-        .top-bar .social-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .top-bar .social-links a {
-            color: #e0e0e0;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        .logo-cafe {
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
         
-        .top-bar .social-links a:hover {
+        .logo-cafe i {
+            font-size: 1.4rem;
             color: #d4af37;
-            transform: translateY(-2px);
         }
         
-        .radio-trigger {
-            background: linear-gradient(135deg, #d4af37, #f5e56b);
-            border: none;
-            padding: 8px 18px;
-            border-radius: 50px;
+        .logo-cafe span {
+            font-size: 1rem;
             font-weight: 700;
-            font-size: 0.85rem;
-            color: #1a1a1a;
-            cursor: pointer;
+            color: #e0e0e0;
+        }
+        
+        .frases-wrapper {
+            flex: 2;
+            overflow: hidden;
+            white-space: nowrap;
+            min-width: 0;
+        }
+        
+        .frases-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: tickerScrollLento 50s linear infinite;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #d4af37;
+        }
+        
+        .frases-content span {
+            display: inline-block;
+            margin-right: 35px;
+            background: rgba(212,175,55,0.1);
+            padding: 4px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+        
+        .frases-wrapper:hover .frases-content {
+            animation-play-state: paused;
+        }
+        
+        @keyframes tickerScrollLento {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+        
+        .area-direita {
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            animation: radioPulse 1.5s ease-in-out infinite;
-            font-family: 'Poppins', sans-serif;
+            gap: 12px;
+            flex-shrink: 0;
         }
         
-        .radio-trigger:hover {
-            transform: scale(1.02);
-            animation: none;
-        }
-        
-        .theme-toggle {
+        .clima-widget {
+            display: flex;
+            align-items: center;
+            gap: 5px;
             background: rgba(212,175,55,0.15);
-            border: 2px solid rgba(212,175,55,0.5);
+            padding: 5px 10px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #d4af37;
+        }
+        
+        .btn-tema {
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.5);
             border-radius: 50px;
-            padding: 8px 20px;
+            padding: 5px 14px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             transition: all 0.3s ease;
             color: #d4af37;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
-        .theme-toggle:hover {
+        .btn-tema:hover {
             background: rgba(212,175,55,0.3);
             transform: scale(1.02);
-            border-color: #d4af37;
         }
         
+        .hamburger {
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span {
+            width: 18px;
+            height: 2px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+        
+        /* Menu Lateral */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #1a1a1a;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            z-index: 1100;
+            transition: left 0.3s ease;
+            padding: 100px 20px 20px;
+        }
+        
+        body.tema-claro .sidebar {
+            background: #ffffff;
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        
+        body.tema-claro .sidebar a {
+            color: #1a1a1a;
+        }
+        
+        .sidebar a:hover {
+            background: rgba(212,175,55,0.2);
+        }
+        
+        .sidebar .divider {
+            height: 1px;
+            background: rgba(212,175,55,0.2);
+            margin: 15px 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* HERO */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -146,7 +359,7 @@
             text-align: center;
             background: #1a1a1a;
             overflow: hidden;
-            margin-top: 60px;
+            margin-top: 0;
         }
         
         .hero-banner {
@@ -220,11 +433,127 @@
             letter-spacing: 1px;
         }
         
+        /* BARRA DE PESQUISA */
+        .busca-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .busca-wrapper {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .busca-input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 2px solid #d4af37;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .busca-input:focus {
+            border-color: #f5e56b;
+            box-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+        
+        .busca-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .busca-btn {
+            background: linear-gradient(135deg, #d4af37, #f5e56b);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+        }
+        
+        .busca-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+        }
+        
+        .resultado-busca {
+            display: none;
+            background: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            padding: 15px;
+            max-width: 500px;
+            width: 100%;
+            border-left: 3px solid #d4af37;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        body.tema-claro .resultado-busca {
+            background: rgba(255,255,255,0.95);
+        }
+        
+        .resultado-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .resultado-item:hover {
+            background: rgba(212,175,55,0.1);
+            transform: translateX(5px);
+            border-radius: 10px;
+        }
+        
+        .resultado-item:last-child {
+            border-bottom: none;
+        }
+        
+        .resultado-nome {
+            font-weight: 700;
+            color: #d4af37;
+            font-size: 0.9rem;
+        }
+        
+        .resultado-preco {
+            font-size: 0.8rem;
+            color: #f5e56b;
+            margin-top: 3px;
+        }
+        
+        .resultado-desc {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 5px;
+        }
+        
+        body.tema-claro .resultado-desc {
+            color: #666;
+        }
+        
+        .sem-resultado {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.6);
+        }
+        
         .btn-group {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 25px;
         }
         
         .btn {
@@ -277,8 +606,21 @@
             transform: translateY(-3px);
         }
         
+        /* TEMA CLARO */
         body.tema-claro {
             background: #fef9e8;
+            color: #1a1a1a;
+        }
+        
+        body.tema-claro .barra-noticias {
+            background: linear-gradient(135deg, #d4af37, #e6c85c);
+        }
+        
+        body.tema-claro .barra-principal {
+            background: rgba(255,255,245,0.95);
+        }
+        
+        body.tema-claro .logo-cafe span {
             color: #1a1a1a;
         }
         
@@ -290,34 +632,10 @@
             opacity: 0.15;
         }
         
-        body.tema-claro .top-bar {
-            background: rgba(255,255,245,0.95);
-        }
-        
-        body.tema-claro .top-bar .social-links a {
-            color: #1a1a1a;
-        }
-        
-        body.tema-claro .hero p,
-        body.tema-claro .section-subtitle,
-        body.tema-claro .horario-destaque span,
-        body.tema-claro .qrcode-section p,
-        body.tema-claro .info-card p,
-        body.tema-claro footer p {
-            color: #2c2c2c;
-        }
-        
-        body.tema-claro .hero-badge {
-            color: #d4af37;
-            border-color: #d4af37;
-        }
-        
         body.tema-claro .menu-item,
         body.tema-claro .info-card,
-        body.tema-claro .qrcode-section,
-        body.tema-claro .gallery-item {
+        body.tema-claro .qrcode-section {
             background: #ffffff;
-            border-color: rgba(212,175,55,0.3);
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
@@ -329,13 +647,8 @@
             color: #4a4a4a;
         }
         
-        body.tema-claro .menu-item-price {
-            color: #b87c00;
-        }
-        
         body.tema-claro .categoria-titulo {
             color: #1a1a1a;
-            border-bottom-color: #d4af37;
         }
         
         body.tema-claro .section-title {
@@ -344,20 +657,21 @@
             -webkit-text-fill-color: transparent;
         }
         
-        body.tema-claro .info-card h3 {
-            color: #1a1a1a;
-        }
-        
-        body.tema-claro .pix-chave {
-            background: rgba(212,175,55,0.15);
-            color: #1a1a1a;
-        }
-        
         body.tema-claro footer {
             background: #f5efe0;
-            border-top-color: rgba(212,175,55,0.2);
         }
         
+        body.tema-claro .busca-input {
+            background: rgba(255,255,255,0.9);
+            color: #1a1a1a;
+            border-color: #b87c00;
+        }
+        
+        body.tema-claro .busca-input::placeholder {
+            color: #999;
+        }
+        
+        /* SEÇÕES DO SITE */
         .section {
             padding: 60px 20px;
             max-width: 1200px;
@@ -381,6 +695,10 @@
             font-size: 1rem;
         }
         
+        body.tema-claro .section-subtitle {
+            color: #4a4a4a;
+        }
+        
         .categoria-titulo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -391,11 +709,7 @@
             color: #e0e0e0;
         }
         
-        .categoria-titulo i {
-            margin-right: 10px;
-            color: #d4af37;
-        }
-        
+        /* CARDÁPIO COM EFEITO DE LUZ NAS BORDAS */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -407,13 +721,14 @@
             border-radius: 16px;
             padding: 16px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 0 5px rgba(212,175,55,0.1);
         }
         
         .menu-item:hover {
             transform: translateY(-3px);
-            border-color: rgba(212,175,55,0.4);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: rgba(212,175,55,0.6);
+            box-shadow: 0 0 15px rgba(212,175,55,0.4);
         }
         
         .menu-item-header {
@@ -469,208 +784,45 @@
         }
         
         .qrcode-placeholder i {
-            font-size: 5rem;
+            font-size: 4rem;
             color: #1a1a1a;
+        }
+        
+        .pix-area {
+            text-align: center;
+            margin-top: 20px;
         }
         
         .pix-chave {
             background: rgba(212,175,55,0.1);
             padding: 12px 20px;
             border-radius: 50px;
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .radio-player-section {
-            margin: 40px 0;
-            padding: 25px;
-            background: rgba(212,175,55,0.1);
-            border-radius: 30px;
-            border: 1px solid rgba(212,175,55,0.3);
-            text-align: center;
-            transition: all 0.5s ease;
-            scroll-margin-top: 80px;
-        }
-        
-        .radio-player-section h3 {
-            color: #d4af37;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-        
-        .radio-player-section h3 i {
-            margin-right: 10px;
-        }
-        
-        .player-controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .player-btn {
-            background: linear-gradient(135deg, #d4af37, #f5e56b);
-            border: none;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #1a1a1a;
-            transition: all 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
             justify-content: center;
         }
         
-        .player-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .progress-container {
-            margin: 20px auto;
-            max-width: 400px;
-            padding: 0 10px;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 5px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 5px;
+        .btn-copiar-pix {
+            background: rgba(212,175,55,0.2);
+            border: 1px solid rgba(212,175,55,0.5);
+            padding: 8px 16px;
+            border-radius: 40px;
             cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #d4af37, #f5e56b);
-            border-radius: 5px;
-            width: 0%;
-            position: relative;
-        }
-        
-        .time-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.6);
-        }
-        
-        .now-playing {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: #d4af37;
-            margin-top: 15px;
-            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .now-playing i {
-            margin-right: 5px;
-        }
-        
-        .gallery-section {
-            margin: 40px 0;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.05);
-            aspect-ratio: 1 / 1;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(212,175,55,0.2);
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            border-color: #d4af37;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-video-large {
-            grid-column: span 2;
-            aspect-ratio: 16 / 9;
-            background: #000;
-        }
-        
-        .gallery-video-large iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        @media (max-width: 1024px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .gallery-video-large {
-                grid-column: span 2;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .section-title {
-                font-size: 1.6rem;
-            }
-            .btn-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            .btn {
-                width: 220px;
-                justify-content: center;
-            }
-            .top-bar {
-                justify-content: center;
-                text-align: center;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .gallery-video-large {
-                grid-column: span 1;
-            }
-            .categoria-titulo {
-                font-size: 1.4rem;
-            }
-            .menu-item-name {
-                font-size: 0.85rem;
-            }
-            .player-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
-            }
+        .btn-copiar-pix:hover {
+            background: rgba(212,175,55,0.4);
+            transform: scale(1.02);
         }
         
         .info-grid {
@@ -678,6 +830,9 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .info-card {
@@ -705,16 +860,14 @@
             font-size: 1.1rem;
         }
         
-        .info-card p {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.85rem;
-        }
-        
         .map-container {
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(212,175,55,0.3);
             margin-bottom: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .map-container iframe {
@@ -728,10 +881,6 @@
             text-align: center;
             padding: 40px;
             border-top: 1px solid rgba(212,175,55,0.1);
-        }
-        
-        footer p {
-            color: rgba(255,255,255,0.6);
         }
         
         .assinatura {
@@ -762,24 +911,195 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
+        
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #1a1a1a;
+            color: #d4af37;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1200;
+            animation: fadeInUp 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-left: 3px solid #d4af37;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 900px) {
+            body {
+                padding-top: 115px;
+            }
+            
+            .barra-noticias {
+                padding: 5px 12px;
+            }
+            
+            .barra-principal {
+                top: 48px;
+                padding: 8px 12px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .frases-wrapper {
+                width: 100%;
+                order: 3;
+            }
+            
+            .area-direita {
+                order: 2;
+            }
+            
+            .logo-cafe {
+                order: 1;
+            }
+            
+            .ticker-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .ticker-content {
+                animation: none !important;
+                display: inline-block;
+                white-space: nowrap;
+                font-size: 0.7rem;
+            }
+            
+            .ticker-content span {
+                display: inline-block;
+                margin-right: 20px;
+                padding: 2px 8px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 220px;
+                justify-content: center;
+            }
+            
+            .busca-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .busca-btn {
+                width: 150px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Efeito de luz mais suave no celular */
+            .menu-item {
+                box-shadow: 0 0 3px rgba(212,175,55,0.15);
+            }
+            
+            .menu-item:hover {
+                box-shadow: 0 0 10px rgba(212,175,55,0.3);
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .barra-principal {
+                top: 60px;
+            }
+            .clima-widget {
+                font-size: 0.65rem;
+                padding: 3px 8px;
+            }
+            .btn-tema {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+            }
+            .hamburger {
+                width: 32px;
+                height: 32px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <div class="social-links">
-        <a href="https://www.instagram.com/cafedolobinho/" target="_blank">
-            <i class="fab fa-instagram"></i> @cafedolobinho
-        </a>
-    </div>
-    <div style="display: flex; gap: 10px;">
-        <button class="radio-trigger" onclick="irParaRadio()">
-            <i class="fas fa-headphones"></i> 🎵 Rádio do Lobinho
-        </button>
-        <div class="theme-toggle" onclick="alternarTema()">
-            <i class="fas fa-sun"></i> <i class="fas fa-moon"></i> TEMA
+<!-- BARRA DE NOTÍCIAS (TICKER) -->
+<div class="barra-noticias">
+    <div class="container-noticias">
+        <div class="selo-ao-vivo">
+            <span class="ponto-vivo"></span>
+            AO VIVO
+        </div>
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="tickerNoticias">
+                <span>📰 Carregando notícias...</span>
+            </div>
         </div>
     </div>
+</div>
+
+<!-- BARRA PRINCIPAL (CAFÉ + CLIMA + TEMA + MENU) -->
+<div class="barra-principal">
+    <div class="logo-cafe">
+        <i class="fas fa-mug-hot"></i>
+        <span>CAFÉ DO LOBINHO</span>
+    </div>
+    
+    <div class="frases-wrapper">
+        <div class="frases-content" id="frasesCafe">
+            <span>🕐 SEG A SÁB • 06:30 ÀS 11:00</span>
+            <span>📍 AV. TARUMÃ, 1574 - PRAÇA 14</span>
+            <span>💰 PIX: miracipm62@gmail.com</span>
+            <span>🥐 TAPIOCA QUENTE TODOS OS DIAS</span>
+            <span>🎵 RÁDIO DO LOBINHO NO AR</span>
+            <span>☕ CAFÉ FRESQUINHO</span>
+            <span>🌟 TUCUMÃ COM QUEIJO - O CLÁSSICO</span>
+        </div>
+    </div>
+    
+    <div class="area-direita">
+        <div class="clima-widget" id="climaWidget">
+            <span id="climaIcone">🌡️</span>
+            <span id="climaTemp">--°C</span>
+            <span id="climaDesc">Manaus, AM</span>
+        </div>
+        <div class="btn-tema" onclick="alternarTema()">
+            <i class="fas fa-sun"></i> <i class="fas fa-moon"></i> TEMA
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="fecharMenu()"></div>
+
+<!-- Menu Lateral -->
+<div id="sidebar" class="sidebar">
+    <a href="index.html" onclick="fecharMenu()"><i class="fas fa-home"></i> INÍCIO</a>
+    <a href="#cardapio" onclick="fecharMenu()"><i class="fas fa-utensils"></i> CARDÁPIO</a>
+    <a href="galeria.html" onclick="fecharMenu()"><i class="fas fa-images"></i> GALERIA</a>
+    <a href="radio.html" onclick="fecharMenu()"><i class="fas fa-headphones"></i> RÁDIO DO LOBINHO</a>
+    <a href="#localizacao" onclick="fecharMenu()"><i class="fas fa-map-marker-alt"></i> LOCALIZAÇÃO</a>
+    <div class="divider"></div>
+    <a href="https://www.instagram.com/cafedolobinho/" target="_blank"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+    <a href="https://wa.me/5592992674472" target="_blank"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
 </div>
 
 <div class="hero">
@@ -796,6 +1116,15 @@
         <div class="horario-destaque">
             <i class="fas fa-clock"></i>
             <span>🕐 SEGUNDA A SÁBADO • 06:30 ÀS 11:00</span>
+        </div>
+        
+        <!-- BARRA DE PESQUISA -->
+        <div class="busca-container">
+            <div class="busca-wrapper">
+                <input type="text" id="buscaInput" class="busca-input" placeholder="🔍 Pesquisar no cardápio... (ex: X-PEDRO, tapioca, tucumã)">
+                <button class="busca-btn" onclick="buscarNoCardapio()">🔍 BUSCAR</button>
+            </div>
+            <div id="resultadoBusca" class="resultado-busca"></div>
         </div>
     </div>
 </div>
@@ -824,40 +1153,16 @@
     <div class="qrcode-section">
         <h3><i class="fas fa-qrcode"></i> QR CODE</h3>
         <div class="qrcode-placeholder">
-            <i class="fas fa-coffee"></i>
+            <i class="fas fa-qrcode"></i>
         </div>
         <p style="margin-bottom: 15px;">Escaneie o QR Code para acessar o cardápio digital</p>
-        <div class="pix-chave">
-            <i class="fas fa-pix"></i> PIX: miracipm62@gmail.com
-        </div>
-    </div>
-</div>
-
-<div class="section gallery-section">
-    <h2 class="section-title">Momentos Registrados</h2>
-    <p class="section-subtitle">Venha fazer parte dessa história</p>
-    
-    <div class="gallery-grid">
-        <div class="gallery-item">
-            <img src="./imagem/Captura de tela de 2026-03-23 13-23-12.png" alt="Café especial do Lobinho">
-        </div>
-        <div class="gallery-item">
-            <img src="./imagem/lobinho4.jpg" alt="Tapioca caseira">
-        </div>
-        <div class="gallery-item">
-            <img src="./imagem/lobinho5.jpg" alt="Espaço aconchegante">
-        </div>
-        <div class="gallery-item">
-            <img src="./imagem/lobinho6.jpg" alt="Equipe Lobinho">
-        </div>
-        <div class="gallery-item">
-            <img src="./imagem/lobinho7.jpg" alt="Sabor amazônico">
-        </div>
-        <div class="gallery-item">
-            <img src="./imagem/lobinho10.jpeg" alt="Café da manhã especial">
-        </div>
-        <div class="gallery-item gallery-video-large">
-            <iframe src="./imagem/videolobinho.mp4" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="pix-area">
+            <div class="pix-chave">
+                <i class="fab fa-pix"></i> PIX: miracipm62@gmail.com
+                <button class="btn-copiar-pix" onclick="copiarPix()">
+                    <i class="fas fa-copy"></i> COPIAR
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -883,7 +1188,7 @@
     </div>
 </div>
 
-<div class="section">
+<div id="localizacao" class="section">
     <h2 class="section-title">Onde Estamos</h2>
     <p class="section-subtitle">Venha nos visitar e experimentar nossas delícias</p>
     
@@ -896,41 +1201,6 @@
         <a href="https://maps.app.goo.gl/EYVF5871eu6N9KHK8" class="btn btn-mapa" target="_blank">
             📍 ABRIR NO GOOGLE MAPS
         </a>
-    </div>
-</div>
-
-<!-- SEÇÃO DA RÁDIO DO LOBINHO -->
-<div id="radio-lobinho" class="section radio-player-section">
-    <h3><i class="fas fa-headphones"></i> 🎵 Rádio do Lobinho</h3>
-    <p class="section-subtitle">A trilha sonora do seu café</p>
-    
-    <div class="player-controls">
-        <button class="player-btn" onclick="musicaAnterior()">
-            <i class="fas fa-backward"></i>
-        </button>
-        <button class="player-btn" id="playBtn" onclick="tocarMusica()">
-            <i class="fas fa-play"></i>
-        </button>
-        <button class="player-btn" id="pauseBtn" onclick="pausarMusica()" style="display: none;">
-            <i class="fas fa-pause"></i>
-        </button>
-        <button class="player-btn" onclick="proximaMusica()">
-            <i class="fas fa-forward"></i>
-        </button>
-    </div>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar" onclick="buscarMusica(event)">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="time-info">
-            <span id="currentTime">0:00</span>
-            <span id="durationTime">0:00</span>
-        </div>
-    </div>
-    
-    <div class="now-playing">
-        <i class="fas fa-music"></i> <span id="musicaAtual">Carregando...</span>
     </div>
 </div>
 
@@ -948,6 +1218,7 @@
 </a>
 
 <script>
+    // ========== CARDÁPIO ==========
     const cardapio = {
         sanduiches: [
             { nome: "Pão c/ Queijo Prato / Presunto / Ovo + Café ou Suco", preco: "10,00" },
@@ -1016,6 +1287,77 @@
         `).join('');
     }
     
+    // ========== BUSCA NO CARDÁPIO ==========
+    function buscarNoCardapio() {
+        const termo = document.getElementById('buscaInput').value.toLowerCase().trim();
+        const resultadoDiv = document.getElementById('resultadoBusca');
+        
+        if (!termo) {
+            resultadoDiv.style.display = 'none';
+            return;
+        }
+        
+        let resultados = [];
+        
+        cardapio.sanduiches.forEach(item => {
+            if (item.nome.toLowerCase().includes(termo)) {
+                resultados.push({
+                    nome: item.nome,
+                    preco: item.preco,
+                    desc: '',
+                    categoria: 'Sanduíche'
+                });
+            }
+        });
+        
+        cardapio.tapiocas.forEach(item => {
+            if (item.nome.toLowerCase().includes(termo)) {
+                resultados.push({
+                    nome: item.nome,
+                    preco: item.preco,
+                    desc: '',
+                    categoria: 'Tapioca'
+                });
+            }
+        });
+        
+        cardapio.especiais.forEach(item => {
+            if (item.nome.toLowerCase().includes(termo) || item.desc.toLowerCase().includes(termo)) {
+                resultados.push({
+                    nome: item.nome,
+                    preco: item.preco,
+                    desc: item.desc,
+                    categoria: 'Especial'
+                });
+            }
+        });
+        
+        if (resultados.length > 0) {
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.innerHTML = resultados.map(item => `
+                <div class="resultado-item" onclick="irParaCardapio('${item.categoria}')">
+                    <div class="resultado-nome">${item.nome}</div>
+                    <div class="resultado-preco">R$ ${item.preco}</div>
+                    ${item.desc ? `<div class="resultado-desc">${item.desc}</div>` : ''}
+                    <div class="resultado-desc" style="color: #d4af37; margin-top: 5px;">📌 Clique para ver no cardápio</div>
+                </div>
+            `).join('');
+        } else {
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.innerHTML = `<div class="sem-resultado">🔍 Nenhum item encontrado para "<strong>${termo}</strong>"<br>💡 Tente: X-PEDRO, tapioca, tucumã, café</div>`;
+        }
+    }
+    
+    function irParaCardapio(categoria) {
+        const cardapioSection = document.getElementById('cardapio');
+        if (cardapioSection) {
+            cardapioSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        document.getElementById('resultadoBusca').style.display = 'none';
+        document.getElementById('buscaInput').value = '';
+    }
+    
+    // ========== TEMA ==========
     function alternarTema() {
         document.body.classList.toggle('tema-claro');
         const tema = document.body.classList.contains('tema-claro') ? 'claro' : 'escuro';
@@ -1029,154 +1371,148 @@
         }
     }
     
-    let audio = null;
-    let musicaAtual = 0;
-    
-    // PLAYLIST COM SUAS MÚSICAS - CORRIGIDA
-    let playlist = [
-        './berlim.mp3',
-        './ABBA - Dancing Queen.mp3',
-        './irene.mp3',
-        './tina.mp3'
-    ];
-    
-    function irParaRadio() {
-        const radioSection = document.getElementById('radio-lobinho');
-        if (radioSection) {
-            radioSection.scrollIntoView({ behavior: 'smooth' });
+    // ========== CLIMA ==========
+    async function buscarClima() {
+        try {
+            const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-3.1019&longitude=-60.0250&current_weather=true&timezone=America/Manaus');
+            const dados = await response.json();
+            const temp = Math.round(dados.current_weather.temperature);
+            const codigo = dados.current_weather.weathercode;
+            
+            let iconeEmoji = '🌡️';
+            let desc = '';
+            
+            if (codigo === 0) { iconeEmoji = '☀️'; desc = 'Céu limpo'; }
+            else if (codigo === 1 || codigo === 2) { iconeEmoji = '⛅'; desc = 'Parcialmente nublado'; }
+            else if (codigo === 3) { iconeEmoji = '☁️'; desc = 'Nublado'; }
+            else if (codigo >= 45 && codigo <= 48) { iconeEmoji = '🌫️'; desc = 'Nevoeiro'; }
+            else if ((codigo >= 51 && codigo <= 55) || (codigo >= 61 && codigo <= 65) || (codigo >= 80 && codigo <= 82)) { 
+                iconeEmoji = '🌧️'; desc = 'Chuva'; 
+            }
+            else if (codigo >= 95 && codigo <= 99) { iconeEmoji = '⛈️'; desc = 'Tempestade'; }
+            else { iconeEmoji = '🌡️'; desc = 'Manaus'; }
+            
+            document.getElementById('climaTemp').innerHTML = `${temp}°C`;
+            document.getElementById('climaDesc').innerHTML = `Manaus, AM • ${desc}`;
+            document.getElementById('climaIcone').innerHTML = iconeEmoji;
+        } catch (error) {
+            console.log('Erro ao buscar clima:', error);
         }
     }
     
-    function formatarTempo(segundos) {
-        if (isNaN(segundos)) return '0:00';
-        const mins = Math.floor(segundos / 60);
-        const segs = Math.floor(segundos % 60);
-        return `${mins}:${segs.toString().padStart(2, '0')}`;
-    }
+    // ========== NOTÍCIAS G1 COM UTF-8 CORRIGIDO ==========
+    let noticiasLista = [];
     
-    function atualizarProgresso() {
-        if (audio && audio.duration) {
-            const porcentagem = (audio.currentTime / audio.duration) * 100;
-            document.getElementById('progressFill').style.width = porcentagem + '%';
-            document.getElementById('currentTime').innerHTML = formatarTempo(audio.currentTime);
-            document.getElementById('durationTime').innerHTML = formatarTempo(audio.duration);
-        }
-    }
-    
-    function buscarMusica(event) {
-        if (audio && audio.duration) {
-            const barra = document.getElementById('progressBar');
-            const rect = barra.getBoundingClientRect();
-            const clickX = event.clientX - rect.left;
-            const largura = rect.width;
-            const porcentagem = clickX / largura;
-            audio.currentTime = porcentagem * audio.duration;
-        }
-    }
-    
-    function atualizarNomeMusica() {
-        let nome = playlist[musicaAtual].replace('./', '').replace('.mp3', '');
-        document.getElementById('musicaAtual').innerHTML = nome;
-    }
-    
-    function tocarMusica() {
-        if (!audio) {
-            audio = new Audio(playlist[musicaAtual]);
-            audio.addEventListener('timeupdate', atualizarProgresso);
-            audio.addEventListener('ended', function() {
-                proximaMusica();
-            });
-            audio.addEventListener('loadedmetadata', function() {
-                document.getElementById('durationTime').innerHTML = formatarTempo(audio.duration);
-            });
-        }
+    function decodeHtmlEntities(texto) {
+        const entidades = {
+            '&aacute;': 'á', '&Aacute;': 'Á',
+            '&acirc;': 'â', '&Acirc;': 'Â',
+            '&atilde;': 'ã', '&Atilde;': 'Ã',
+            '&agrave;': 'à', '&Agrave;': 'À',
+            '&eacute;': 'é', '&Eacute;': 'É',
+            '&ecirc;': 'ê', '&Ecirc;': 'Ê',
+            '&iacute;': 'í', '&Iacute;': 'Í',
+            '&oacute;': 'ó', '&Oacute;': 'Ó',
+            '&otilde;': 'õ', '&Otilde;': 'Õ',
+            '&ocirc;': 'ô', '&Ocirc;': 'Ô',
+            '&uacute;': 'ú', '&Uacute;': 'Ú',
+            '&ccedil;': 'ç', '&Ccedil;': 'Ç',
+            '&amp;': '&', '&lt;': '<', '&gt;': '>',
+            '&quot;': '"', '&#039;': "'", '&nbsp;': ' '
+        };
         
-        audio.play().then(() => {
-            document.getElementById('playBtn').style.display = 'none';
-            document.getElementById('pauseBtn').style.display = 'flex';
-            atualizarNomeMusica();
-        }).catch(erro => {
-            console.log('Erro ao tocar:', erro);
+        let textoDecodificado = texto;
+        for (let [entidade, letra] of Object.entries(entidades)) {
+            textoDecodificado = textoDecodificado.split(entidade).join(letra);
+        }
+        return textoDecodificado;
+    }
+    
+    async function buscarNoticias() {
+        const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/';
+        
+        try {
+            const response = await fetch(url);
+            const dados = await response.json();
+            
+            if (dados.items && dados.items.length > 0) {
+                noticiasLista = dados.items.slice(0, 15).map(item => {
+                    let titulo = decodeHtmlEntities(item.title);
+                    if (titulo.length > 80) titulo = titulo.substring(0, 77) + '...';
+                    return titulo;
+                });
+            } else {
+                usarFallback();
+            }
+            
+            atualizarTickerNoticias();
+            
+        } catch (error) {
+            console.log('Erro ao buscar notícias G1:', error);
+            usarFallback();
+        }
+    }
+    
+    function usarFallback() {
+        noticiasLista = [
+            "Café do Lobinho - O melhor café da manhã de Manaus",
+            "Av. Tarumã, 1574 - Praça 14 de Janeiro",
+            "Tapioca quentinha todos os dias",
+            "X-PEDRO - O lanche mais pedido do momento!",
+            "Pix disponível: miracipm62@gmail.com",
+            "Venha nos visitar de Segunda a Sábado das 06:30 às 11:00"
+        ];
+        atualizarTickerNoticias();
+    }
+    
+    function atualizarTickerNoticias() {
+        const tickerDiv = document.getElementById('tickerNoticias');
+        if (tickerDiv && noticiasLista.length > 0) {
+            let noticiasDuplicadas = [...noticiasLista, ...noticiasLista];
+            tickerDiv.innerHTML = noticiasDuplicadas.map(noticia => `<span>📰 ${noticia}</span>`).join('');
+        }
+    }
+    
+    // ========== COPIAR PIX ==========
+    function copiarPix() {
+        const pix = 'miracipm62@gmail.com';
+        navigator.clipboard.writeText(pix).then(() => {
+            mostrarToast('✅ PIX copiado! miracipm62@gmail.com');
+        }).catch(() => {
+            mostrarToast('❌ Erro ao copiar. Copie manualmente: ' + pix);
         });
     }
     
-    function pausarMusica() {
-        if (audio) {
-            audio.pause();
-            document.getElementById('playBtn').style.display = 'flex';
-            document.getElementById('pauseBtn').style.display = 'none';
-        }
+    function mostrarToast(mensagem) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${mensagem}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
     
-    function proximaMusica() {
-        musicaAtual++;
-        if (musicaAtual >= playlist.length) {
-            musicaAtual = 0;
-        }
+    // ========== MENU HAMBURGUER ==========
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
         
-        if (audio) {
-            audio.pause();
-            audio.src = playlist[musicaAtual];
-            audio.load();
-            if (document.getElementById('playBtn').style.display === 'none') {
-                audio.play();
-            }
-        } else {
-            audio = new Audio(playlist[musicaAtual]);
-            audio.addEventListener('timeupdate', atualizarProgresso);
-            audio.addEventListener('ended', function() {
-                proximaMusica();
-            });
-            audio.addEventListener('loadedmetadata', function() {
-                document.getElementById('durationTime').innerHTML = formatarTempo(audio.duration);
-            });
-        }
-        atualizarNomeMusica();
-        document.getElementById('progressFill').style.width = '0%';
-        document.getElementById('currentTime').innerHTML = '0:00';
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        hamburger.classList.toggle('active');
     }
     
-    function musicaAnterior() {
-        musicaAtual--;
-        if (musicaAtual < 0) {
-            musicaAtual = playlist.length - 1;
-        }
+    function fecharMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
         
-        if (audio) {
-            audio.pause();
-            audio.src = playlist[musicaAtual];
-            audio.load();
-            if (document.getElementById('playBtn').style.display === 'none') {
-                audio.play();
-            }
-        } else {
-            audio = new Audio(playlist[musicaAtual]);
-            audio.addEventListener('timeupdate', atualizarProgresso);
-            audio.addEventListener('ended', function() {
-                proximaMusica();
-            });
-            audio.addEventListener('loadedmetadata', function() {
-                document.getElementById('durationTime').innerHTML = formatarTempo(audio.duration);
-            });
-        }
-        atualizarNomeMusica();
-        document.getElementById('progressFill').style.width = '0%';
-        document.getElementById('currentTime').innerHTML = '0:00';
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
     }
     
-    renderizarCardapio();
-    carregarTema();
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-    
+    // ========== ANIMAÇÕES SCROLL ==========
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -1191,12 +1527,42 @@
         });
     }, observerOptions);
     
-    document.querySelectorAll('.section, .info-card, .qrcode-section, .gallery-section, .radio-player-section').forEach(el => {
+    document.querySelectorAll('.section, .info-card, .qrcode-section').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease';
         observer.observe(el);
     });
+    
+    // ========== INICIALIZAÇÃO ==========
+    renderizarCardapio();
+    carregarTema();
+    buscarClima();
+    buscarNoticias();
+    
+    setInterval(buscarClima, 600000);
+    setInterval(buscarNoticias, 300000);
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+    
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', fecharMenu);
+    });
+    
+    window.buscarNoCardapio = buscarNoCardapio;
+    window.irParaCardapio = irParaCardapio;
+    window.copiarPix = copiarPix;
+    window.alternarTema = alternarTema;
+    window.toggleMenu = toggleMenu;
+    window.fecharMenu = fecharMenu;
 </script>
 
 </body>
